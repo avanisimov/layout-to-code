@@ -1,8 +1,42 @@
 <html>
-	<head>
-		<title>Layout to code</title>
-	</head>
-	<body>
-		<p>Layout to code</p>
-	</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+
+<head>
+	<title>Layout to code</title>
+</head>
+
+<body>
+	<div id="app" class="container-fluid">
+		<p>{{title}}</p>
+		<div class="col">
+			<div class="row">
+				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="private" name="optradio">private</label>
+				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="public" name="optradio">public</label>
+			</div>
+			<div class="row">
+
+				<input v-model="final" type="checkbox">final</input>
+			</div>
+			<div class="row">
+				<label>prefix</label>
+				<input v-model="prefix" type="text" />
+
+				<label>postfix</label>
+				<input v-model="postfix" type="text" />
+				<button v-on:click="run" class="btn-primary">Run</button>
+			</div>
+		</div>
+		<div style="display: flex; width: 100%">
+			<textarea id="input" v-model="input" type="text"></textarea>
+
+			<textarea id="output" v-model="output" type="text" readonly="readonly"></textarea>
+		</div>
+	</div>
+	<script src="js/main.js"></script>
+</body>
+
 </html>
