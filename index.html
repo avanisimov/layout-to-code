@@ -12,10 +12,12 @@
 <body>
 	<div id="app" class="container-fluid">
 		<p>{{title}}</p>
-		<div class="col">
+		<div style="margin: 16px">
 			<div class="row">
-				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="private" name="optradio">private</label>
-				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="public" name="optradio">public</label>
+				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="private"
+						name="optradio">private</label>
+				<label class="radio-inline"><input v-model="visibiltyMod" type="radio" value="public"
+						name="optradio">public</label>
 			</div>
 			<div class="row">
 
@@ -31,9 +33,21 @@
 			</div>
 		</div>
 		<div style="display: flex; width: 100%">
-			<textarea id="input" v-model="input" type="text"></textarea>
+			<textarea id="input" v-model="input" type="text"
+				style="height: 80%;width: 50%; margin-right: 8px;margin-left: 16px;"></textarea>
+			<div style="height: 80%;width: 50%; margin-right: 16px;margin-left: 8px;">
+				<div>
+					<button v-on:click="copyFields" style="position: absolute; right: 32px;">copy</button>
+					<textarea ref="outputFields" style="height: 50%;width: 100%;" id="output" v-model="outputFields" type="text"
+						readonly="readonly"></textarea>
 
-			<textarea id="output" v-model="output" type="text" readonly="readonly"></textarea>
+				</div>
+				<div>
+					<button v-on:click="copyBind" style="position: absolute; right: 32px;">copy</button>
+					<textarea ref="outputBind" style="height: 50%;width: 100%;" id="output" v-model="outputBind" type="text"
+						readonly="readonly"></textarea>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="js/main.js"></script>

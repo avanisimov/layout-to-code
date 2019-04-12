@@ -3,15 +3,23 @@ var app = new Vue({
     data: {
         title: 'Layout to code',
         input: '',
-        output: '',
+        outputFields: '',
+        outputBind: '',
         visibiltyMod: 'private',
-        final: true,
+        final: false,
         prefix: '',
         postfix: 'View'
     },
     methods: {
+        copyFields: function (event) {
+            this.$refs["outputFields"].select()
+            document.execCommand('copy');
+        },
+        copyBind: function (event) {
+            this.$refs["outputBind"].select()
+            document.execCommand('copy');
+        },
         run: function (event) {
-            this.output = ''
             var parser = new DOMParser();
             var xmlDoc = parser.parseFromString(this.input, "text/xml");
 
@@ -23,15 +31,19 @@ var app = new Vue({
             }
             var prefix = this.prefix
             var postfix = this.postfix
+
+            this.outputFields = ''
             for (var i = 0; i < views.length; i++) {
-                this.output += '\n    ' + visMod + final + views[i].type + ' ' + prefix + snakeToCamel(views[i].id) + postfix
+                this.outputFields += '\n    ' + visMod + final + views[i].type + ' ' + prefix + snakeToCamel(views[i].id) + postfix + ';'
             }
-            this.output += '\n\n    protected void onBindViews(View view) {'
+
+            this.outputBind = ''
+            this.outputBind += '\n\n    protected void onBindViews(View view) {'
             for (var i = 0; i < views.length; i++) {
-                this.output += '\n        ' + prefix + snakeToCamel(views[i].id) + postfix
-                this.output += ' = view.findViewById(R.id.' + views[i].id + ')'
+                this.outputBind += '\n        ' + prefix + snakeToCamel(views[i].id) + postfix
+                this.outputBind += ' = view.findViewById(R.id.' + views[i].id + ');'
             }
-            this.output += '\n    }'
+            this.outputBind += '\n    }'
         }
     }
 })
@@ -64,6 +76,6 @@ function findViews(element) {
     return views
 }
 
-function snakeToCamel(s){
-    return s.replace(/_\w/g, (m) => m[1].toUpperCase() );
+function snakeToCamel(s) {
+    return s.replace(/_\w/g, (m) => m[1].toUpperCase());
 }

@@ -2,7 +2,4 @@ textarea {
     @extend .form-control;
     align: top;
     padding: 0 0 1px 0;
-    height: 80%;
-    width: 50%;
-    margin: 16px
 }
